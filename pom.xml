@@ -6,7 +6,23 @@
 
     <groupId>proz.hubertpolak</groupId>
     <artifactId>mp3_player</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>javazoom</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org</groupId>
+            <artifactId>jaudiotagger</artifactId>
+            <version>2.0.3</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -21,12 +37,35 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <mainClass>proz.hubertpolak.Main</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>proz.hubertpolak.Main</mainClass>
+                            <mainClass>info.ykyuen.eureka.Addition</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
